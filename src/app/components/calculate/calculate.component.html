@@ -1,0 +1,44 @@
+<h2 class="bg-success p-1" style="color:white">Please enter positive initial balances for both accounts</h2>
+<label>Account 1's balance
+<input class="form-control" [(ngModel)]="FirstBalance" [placeholder]="'firstBalance'"/>
+</label>
+<label>Account 2's balance
+<input class="form-control" [(ngModel)]="SecondBalance" [placeholder]="'secondBalance'"/>
+</label>
+<div class="bg-danger text-light" *ngIf="NewTransaction.invalidBalance==true">{{NewTransaction.invalidBalanceMessage}}</div>
+
+<div>
+  <h2 class="bg-primary p-1 mt-1" style="color:white">Add new Transaction</h2>
+  <label>Sender:
+  <select class="form-control m" [(ngModel)]="NewTransaction.sender">
+    <option value="1">Account one</option>
+    <option value="2">Account two</option>
+  </select></label>
+  <label>Receiver:
+  <select class="form-control" [(ngModel)]="NewTransaction.receiver">
+    <option value="1">Account one</option>
+    <option value="2">Account two</option>
+  </select></label>
+  <label>amount:
+  <input class="form-control" type="text" placeholder="amount" [(ngModel)]="NewTransaction.amount"/>
+</label>
+  <button class="btn btn-success" (click)='SeeTransaction(i)'>add new transaction</button>
+<!-- if sender and receiver are not selected or amount is less than or equal to 0 or amount is greater than 1000 display error -->
+  <div class="bg-danger text-light" *ngIf="NewTransaction.invalid==true">{{NewTransaction.invalidMessage}}</div>
+  <div *ngIf="Transactions.length>0">
+  <table>
+    <thead><th>sender</th><th>receiver</th><th>amount</th></thead>
+    <tbody>
+  <tr [ngClass]="{'bg-danger': transaction.invalid==true}" *ngFor="let transaction of Transactions; let i=index">
+  <td>{{transaction.sender}}</td>
+  <td>{{transaction.receiver}}</td>
+  <td>{{transaction.amount|currency}}</td>
+  </tr>
+</tbody>
+</table>
+<label>Account 1 new balance
+    <input class="form-control" [(ngModel)]="FirstNewBalance" [placeholder]="'FirstNewBalance'"/>
+    </label>
+    <label>Account 2 new balance<input class="form-control" [(ngModel)]="SecondNewBalance" [placeholder]="'SecondNewBalance'"/>
+    </label>
+</div>
